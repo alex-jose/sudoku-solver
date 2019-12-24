@@ -1,12 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SudokuSolver from './components/SudokuSolver';
 
 function App() {
   return (
-    <div className="App">
-      Hello World!    
-    </div>
+    <SudokuSolver />
   );
 }
 
