@@ -32,7 +32,7 @@ function validate(cells) {
 function isFilled(cells) {
     for (let i = 0; i < 9; i++)
         for (let j = 0; j < 9; j++)
-            if (cells[i][j] === "0") return false;
+            if (cells[i][j] === 0) return false;
 
     return true;
 }
@@ -47,7 +47,7 @@ function isFilled(cells) {
 function getUnFilledCell(cells) {
     for (let i = 0; i < 9; i++)
         for (let j = 0; j < 9; j++)
-            if (cells[i][j] === "0") 
+            if (cells[i][j] === 0) 
                 return [i, j];
 
     return null;
@@ -77,7 +77,7 @@ function getPossibleValues(cells, row, column) {
     // find unused values
     let possibleValues = [];
     for (let i=0; i<10;i++) {
-        if (!usedValues.has(String(i))) possibleValues.push(String(i));
+        if (!usedValues.has(i)) possibleValues.push(i);
     }
 
     return possibleValues;
@@ -130,7 +130,7 @@ function solveUtil(cells) {
  */
 export function isValid (cells, row, column) {    
     // unfilled cells are treated as valid
-    if (cells[row][column] === "0") 
+    if (cells[row][column] === 0) 
         return true;
 
     // Check for duplicate in row and column
@@ -148,6 +148,15 @@ export function isValid (cells, row, column) {
     }
 
     return true;
+}
+
+/**
+ * Check if a sudoku grid is solved
+ * 
+ * @param number[][] cells - 9x9 sudoku grid 
+ */
+export function isSolved(cells) {
+    return isFilled(cells) && validate(cells);
 }
 
 /**
