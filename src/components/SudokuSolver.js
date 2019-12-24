@@ -80,27 +80,27 @@ class SudokuSolver extends React.Component {
         return (
             <Container maxWidth="sm">
                 <Grid container spacing={1} direction="column" justify="center">
-                    <Grid item xs>
+                    <Grid item xs style={{ marginTop: "2em" }}>
                         <Box>
-                            <Typography variant="h4" align="center" color="textSecondary"> 
+                            <Typography variant="h2" align="center" style={{ color: "black" }}> 
                                 SUDOKU
                             </Typography>
                         </Box>
                     </Grid>
-                    <Grid item xs  style={{ marginTop: "1em" }}>
+                    <Grid item xs style={{ marginTop: "1em" }}>
                         <Box>
                             <Typography align="center" color="textSecondary"> 
                                 Fill the known cells and let the app solve the rest for you :)
                             </Typography>
                         </Box>
                     </Grid>
-                    <Grid item xs container justify="center" style={{ marginTop: "1.5em" }}>
+                    <Grid item xs container justify="center" style={{ marginTop: "3em" }}>
                         <SudokuGrid 
                             cells={this.state.cells} 
                             onChange={this.handleChange}
                         />
                     </Grid>
-                    <Grid item xs container justify="center">
+                    <Grid item xs container justify="center" style={{ marginBottom: "3em" }}>
                         <Button 
                             mx={2} 
                             size="small" 
