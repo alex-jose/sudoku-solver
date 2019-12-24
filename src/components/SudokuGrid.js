@@ -12,7 +12,7 @@ const SudokuGrid = ({ cells, onChange }) => {
     const borderStyle = { border: ((isSolved(cells))? "1px solid limegreen": "1px solid black") };
 
     return (
-        <table style={{ ...borderStyle }}>
+        <table style={{ ...borderStyle, margin: "0.3em" }}>
             <tbody>{cells.map((row, rowIndex) => (
                 <tr style={{ ...borderStyle }} key={rowIndex}>{row.map((cell, columnIndex) => (
                     <td style={{ ...borderStyle }} key={columnIndex}>
