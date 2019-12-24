@@ -2,7 +2,8 @@ import React from 'react';
 import SudokuGrid from './SudokuGrid';
 import SudokuError from './SudokuError';
 import { solve } from '../services/sudoku';
-import { Button, Grid, Box, Typography, Container } from '@material-ui/core';
+import { Button, Grid, Box, Typography, Container, Backdrop } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 /**
  * Sudoku solver 
@@ -14,6 +15,7 @@ class SudokuSolver extends React.Component {
         this.state = { 
             cells: [...Array(9)].map(_ => [...Array(9)].map(_ => 0)),
             error: "",
+            loading: false
         };
         
         this.solve = this.solve.bind(this);
@@ -56,11 +58,12 @@ class SudokuSolver extends React.Component {
      * Solve the sudoku
      */
     solve() {
+        this.setState({ loading: true });
         let solution = solve(this.state.cells);
         if (solution === null)
-            return this.setState({ error: 'Unable to solve!' });
+            return this.setState({ error: 'Unable to solve!', loading: false });
         else
-            return this.setState({ cells: solution, error: "" });
+            return this.setState({ cells: solution, error: "", loading: false });
     }
 
     /**
@@ -123,6 +126,9 @@ class SudokuSolver extends React.Component {
                     error={this.state.error} 
                     onClose={() => this.setState({ error: "" })} 
                 />
+                <Backdrop open={this.state.loading} style={{ zIndex: "1000" }}>
+                    <CircularProgress color="inherit" />
+                </Backdrop>
             </Container>
         );
     }
