@@ -68,11 +68,24 @@ function getPossibleValues(cells, row, column) {
         usedValues.add(cells[i][column]);
         usedValues.add(cells[row][i]);
     }
+
     for (let i = Math.floor(row / 3 ) * 3; i < Math.floor(row / 3) * 3 + 3; i++) {
         for (let j =Math.floor(column / 3) * 3; j < Math.floor(column / 3) * 3 + 3; j++) {
             usedValues.add(cells[i][j])
         }
     }
+
+    // check diagonal values
+    if (row === column) {
+        for (let i = 0; i < 9; i++) {
+            usedValues.add(cells[i][i])
+        }
+    }
+    if (row + column === 8) {
+        for (let i = 0; i < 9; i++) {
+            usedValues.add(cells[i][8 - i])
+        }
+    }    
 
     // find unused values
     let possibleValues = [];
@@ -141,9 +154,27 @@ export function isValid (cells, row, column) {
 
     // Check for duplicate in 3x3 grid
     for (let i = Math.floor(row / 3 ) * 3; i < Math.floor(row / 3) * 3 + 3; i++) {
-        for (let j =Math.floor(column / 3) * 3; j < Math.floor(column / 3) * 3 + 3; j++) {
+        for (let j = Math.floor(column / 3) * 3; j < Math.floor(column / 3) * 3 + 3; j++) {
             if (i === row || j === column) continue;
             if (cells[i][j] === cells[row][column]) return false;
+        }
+    }
+
+    // Check for duplicate value diagnaly
+    if (row === column) {
+        for (let i = 0; i < 9; i++) {
+            if (i === row)
+                continue;
+            if (cells[row][column] === cells[i][i])
+                return false;
+        }
+    }
+    if (row === 8 - column) {
+        for (let i = 0; i < 9; i++) {
+            if (i === row)
+                continue;
+            if (cells[row][column] === cells[i][8-i])
+                return false;
         }
     }
 
